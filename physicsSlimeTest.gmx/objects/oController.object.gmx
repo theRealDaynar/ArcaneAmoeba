@@ -104,6 +104,7 @@ draw_set_blend_mode(bm_normal)
 
 draw_text(60,60,fps)
 draw_text(60,100,fps_real)
+draw_text(60,140,instance_number(oHeart))
 </string>
           </argument>
         </arguments>
