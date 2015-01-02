@@ -31,8 +31,26 @@ image_blend = make_color_rgb(irandom(70),irandom(70),irandom(70))
 flags = phy_particle_flag_spring|phy_particle_flag_viscous
 physics_particle_group_begin(flags,0,x,y,0,0,0,0, image_blend, 1, 1, 1)
 physics_particle_group_circle(50)
-physics_particle_group_end()
+body = physics_particle_group_end()
 
+/*var count = physics_particle_count()
+if count &gt; 0
+{
+    var buffer = buffer_create( count * 4, buffer_grow,4)
+    physics_particle_get_data(buffer, phy_particle_data_flag_position)
+    var bindx = -1000
+    var bindy = -1000
+    for( var n = 0; n &lt; count; n++)
+    {
+        var xx = buffer_read(buffer, buffer_f32)
+        var yy = buffer_read(buffer, buffer_f32)
+        if distance_to_point(xx,yy) &lt; distance_to_point(bindx,bindy)
+        {
+            bindx = xx
+            bindy = yy
+        }
+    }
+    buffer_delete(buffer)*/
 //heart
 spd = 25
 mind = 1
@@ -137,6 +155,8 @@ alarm[0] = mind_speed
         case 4:
             physics_apply_impulse(x-100,y,spd,0)
 }
+phy_position_x = physics_particle_group_get_centre_x(body)
+phy_position_y = physics_particle_group_get_centre_y(body)
 </string>
           </argument>
         </arguments>
@@ -178,9 +198,7 @@ alarm[0] = mind_speed
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>0,0</point>
-    <point>32,0</point>
-    <point>32,32</point>
-    <point>0,32</point>
+    <point>16,16</point>
+    <point>16,16</point>
   </PhysicsShapePoints>
 </object>
