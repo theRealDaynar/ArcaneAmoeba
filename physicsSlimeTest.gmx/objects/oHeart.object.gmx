@@ -25,34 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>radius = 16
-//body
+            <string>//body
+radius = 50
+radius_buffer = 8
 randomize()
 image_blend = make_color_rgb(irandom(70),irandom(70),irandom(70))
 flags = phy_particle_flag_spring|phy_particle_flag_viscous
 physics_particle_group_begin(flags,0,x,y,0,0,0,0, image_blend, 1, 1, 1)
 physics_particle_group_circle(radius)
 body = physics_particle_group_end()
-radius_buffer = 8
-/*if count &gt; 0
-{
-    var buffer = buffer_create( count * 4, buffer_grow,4)
-    physics_particle_get_data(buffer, phy_particle_data_flag_position)
-    var bindx = -1000
-    var bindy = -1000
-    for( var n = 0; n &lt; count; n++)
-    {
-        var xx = buffer_read(buffer, buffer_f32)
-        var yy = buffer_read(buffer, buffer_f32)
-        if distance_to_point(xx,yy) &lt; distance_to_point(bindx,bindy)
-        {
-            bindx = xx
-            bindy = yy
-        }
-    }
-    buffer_delete(buffer)*/
+
 //heart
-spd = 45
+spd = 25
 mind = 1
 key = 0
 mind_speed = room_speed/2
@@ -141,7 +125,16 @@ alarm[0] = mind_speed
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(key)
+            <string>var xx = physics_particle_group_get_centre_x(body)
+var yy = physics_particle_group_get_centre_y(body)
+if point_distance(phy_position_x,phy_position_y,xx,yy) &gt; radius-16
+{
+    var dir = point_direction(xx,yy,phy_position_x,phy_position_y)
+    phy_position_x = xx+lengthdir_x(radius-16,dir)
+    phy_position_y = yy+lengthdir_y(radius-16,dir)
+}
+
+switch(key)
 {
         case 1:
             physics_apply_impulse(x,y+100,0,-spd)
@@ -154,14 +147,6 @@ alarm[0] = mind_speed
         break;
         case 4:
             physics_apply_impulse(x-100,y,spd,0)
-}
-var xx = physics_particle_group_get_centre_x(body)
-var yy = physics_particle_group_get_centre_y(body)
-if point_distance(phy_position_x,phy_position_y,xx,yy) &gt; radius-16
-{
-    var dir = point_direction(xx,yy,phy_position_x,phy_position_y)
-    phy_position_x = xx+lengthdir_x(radius-16,dir)
-    phy_position_y = yy+lengthdir_y(radius-16,dir)
 }
 </string>
           </argument>
@@ -204,9 +189,9 @@ if point_distance(phy_position_x,phy_position_y,xx,yy) &gt; radius-16
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>32,32</point>
-    <point>0,32</point>
     <point>0,0</point>
     <point>32,0</point>
+    <point>32,32</point>
+    <point>0,32</point>
   </PhysicsShapePoints>
 </object>
