@@ -21,9 +21,14 @@
     <object>objects\oWall</object>
     <object>objects\oSlimeParent</object>
     <object>objects\oHeart</object>
+    <object>objects\oDupe</object>
     <object>objects\oController</object>
+    <object>objects\oTestDouble</object>
+    <object>objects\oTestTriple</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room3</room>
+    <room>rooms\room2</room>
     <room>rooms\room0</room>
   </rooms>
   <help>

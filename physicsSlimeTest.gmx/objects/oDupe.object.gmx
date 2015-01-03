@@ -29,7 +29,7 @@
 radius = 50
 radius_buffer = 8
 randomize()
-image_blend = make_color_rgb(irandom(70),irandom(70),irandom(70))
+image_blend = make_color_rgb(0, 70, 0)
 flags = phy_particle_flag_spring|phy_particle_flag_viscous
 physics_particle_group_begin(flags,0,x,y,0,0,0,0, image_blend, 1, 1, 1)
 physics_particle_group_circle(radius)
